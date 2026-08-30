@@ -1,0 +1,423 @@
+/* ==========================================================================
+   Adi Sawant — Scholarly / Research Profile
+   Design tokens
+   ========================================================================== */
+
+:root {
+  /* Color */
+  --color-paper: #FAFAF7;
+  --color-paper-alt: #F2F0EA;
+  --color-ink: #1A1D1F;
+  --color-ink-soft: #4A4E52;
+  --color-slate: #2B4570;
+  --color-slate-soft: #5B7299;
+  --color-brass: #A87C3F;
+  --color-rule: #D8D6D0;
+  --color-rule-soft: #E8E6E0;
+
+  /* Type */
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+
+  /* Scale */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.4vw, 1.35rem);
+  --step-2: clamp(1.5rem, 1.35rem + 0.7vw, 1.8rem);
+  --step-3: clamp(1.9rem, 1.65rem + 1.1vw, 2.4rem);
+  --step-4: clamp(2.4rem, 2rem + 1.8vw, 3.4rem);
+
+  --nav-width: 260px;
+  --content-max: 780px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-ink);
+  margin: 0 0 0.5em 0;
+}
+
+a {
+  color: var(--color-slate);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-slate-soft);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-brass);
+  border-color: var(--color-brass);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 3px;
+}
+
+p { margin: 0 0 1.1em 0; color: var(--color-ink-soft); }
+
+/* Layout: nav rail + content ------------------------------------------- */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.nav-rail {
+  width: var(--nav-width);
+  flex-shrink: 0;
+  padding: 3rem 2rem;
+  border-right: 1px solid var(--color-rule);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  margin-bottom: 0.15em;
+}
+
+.nav-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  display: block;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list li { margin-bottom: 0.35rem; }
+
+.nav-list a {
+  display: block;
+  border-bottom: none;
+  font-size: var(--step--1);
+  color: var(--color-ink-soft);
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  border-left: 2px solid transparent;
+}
+
+.nav-list a:hover {
+  color: var(--color-ink);
+  background: var(--color-paper-alt);
+}
+
+.nav-list a.active {
+  color: var(--color-ink);
+  border-left: 2px solid var(--color-brass);
+  background: var(--color-paper-alt);
+  font-weight: 500;
+}
+
+.nav-list .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--color-brass);
+  margin-right: 0.5em;
+}
+
+.nav-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule);
+  font-size: 0.72rem;
+  color: var(--color-ink-soft);
+}
+
+.nav-footer a { color: var(--color-ink-soft); }
+
+main {
+  flex: 1;
+  padding: 4rem 3rem 6rem;
+  max-width: 980px;
+}
+
+.content {
+  max-width: var(--content-max);
+}
+
+/* Mobile nav toggle ------------------------------------------------------ */
+
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 880px) {
+  .layout { flex-direction: column; }
+
+  .nav-rail {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--color-rule);
+    padding: 1.5rem;
+  }
+
+  .nav-tagline { margin-bottom: 1rem; }
+
+  .nav-list {
+    display: none;
+  }
+
+  .nav-list.open { display: block; }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    background: none;
+    border: 1px solid var(--color-rule);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.5em 0.9em;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  main { padding: 2.5rem 1.5rem 4rem; }
+}
+
+/* Type utilities ---------------------------------------------------------- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+h1.page-title { font-size: var(--step-4); margin-bottom: 0.3em; }
+h2.section-title { font-size: var(--step-2); margin-top: 3rem; }
+h3.sub-title { font-size: var(--step-1); margin-top: 2rem; }
+
+.lede {
+  font-size: var(--step-1);
+  color: var(--color-ink-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+  max-width: 640px;
+}
+
+/* Rules & dividers -------------------------------------------------------- */
+
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: 2.5rem 0;
+}
+
+/* Cards / entries ----------------------------------------------------------- */
+
+.entry {
+  border-top: 1px solid var(--color-rule-soft);
+  padding: 1.6rem 0;
+}
+
+.entry:first-of-type { border-top: none; padding-top: 0.5rem; }
+
+.entry-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-slate);
+  letter-spacing: 0.02em;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.entry h3 { margin-bottom: 0.2em; }
+
+.entry-org {
+  color: var(--color-ink-soft);
+  font-size: var(--step--1);
+  margin-bottom: 0.6em;
+  display: block;
+}
+
+.entry ul {
+  margin: 0.6em 0 0 0;
+  padding-left: 1.2em;
+  color: var(--color-ink-soft);
+}
+
+.entry li { margin-bottom: 0.4em; }
+
+/* Tags ---------------------------------------------------------------------- */
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin-top: 0.8em;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+  border: 1px solid var(--color-rule);
+  padding: 0.25em 0.7em;
+  border-radius: 20px;
+  background: var(--color-paper-alt);
+}
+
+/* Callout / spec annotation (signature element) ----------------------------- */
+
+.spec-note {
+  position: relative;
+  padding-left: 1.4em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  border-left: 1px solid var(--color-brass);
+  margin: 2.5rem 0;
+  padding: 0.2rem 0 0.2rem 1.4em;
+}
+
+.spec-note strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+/* Credential grid (About page signature) ------------------------------------ */
+
+.credential-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  margin: 2.5rem 0;
+  border-top: 1px solid var(--color-rule);
+  border-left: 1px solid var(--color-rule);
+}
+
+.credential {
+  padding: 1.4rem 1.5rem;
+  border-right: 1px solid var(--color-rule);
+  border-bottom: 1px solid var(--color-rule);
+  position: relative;
+}
+
+.credential .tick {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.credential .value {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  display: block;
+  margin-bottom: 0.15em;
+}
+
+.credential .label {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
+
+/* Buttons / links as CTAs ---------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  padding: 0.65em 1.3em;
+  border: 1px solid var(--color-ink);
+  border-radius: 3px;
+  color: var(--color-ink);
+  background: transparent;
+}
+
+.btn:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+.btn-row { display: flex; gap: 0.8em; flex-wrap: wrap; margin-top: 1.5rem; }
+
+/* Footer ---------------------------------------------------------------------- */
+
+.page-footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
+
+/* Contact form ------------------------------------------------------------------ */
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.contact-list li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-rule-soft);
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.contact-list .contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-soft);
+  width: 90px;
+  flex-shrink: 0;
+}
