@@ -421,3 +421,26 @@ hr.rule {
   width: 90px;
   flex-shrink: 0;
 }
+
+/* Paper links & citation downloads ------------------------------------------------- */
+
+.entry .paper-links {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.2rem 0 0 0;
+}
+
+.paper-links li { margin-bottom: 0.6rem; }
+
+.cite-row {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
+
+.cite-row .cite-label {
+  margin-right: 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.72rem;
+}
